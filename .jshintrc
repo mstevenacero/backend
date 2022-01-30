@@ -1,0 +1,7 @@
+{
+    "esversion"     : 6,
+    "strict"        : true,
+    "unused"        : true,
+    "globalstrict"  : false,
+    "globals"       : {}       
+}
