@@ -2,27 +2,26 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('symptoms',{
+    return queryInterface.createTable('symptoms_polls',{
       id: {
         type: Sequelize.INTEGER,
         autoIncrement:true,
         primaryKey:true
       },
-      id_user: {
+      id_symptoms: {
         type: Sequelize.INTEGER,
         allowNull:false
       },
-      flag: {
+      clasification: {
         type:Sequelize.STRING,
         allowNull:false,
         unique:true,
       },
-      data_symptoms: {
+      data_symptoms_poll: {
         type:Sequelize.JSON,
         allowNull:false,
-    
       },
-      descripcion: {
+      description_profesional: {
         type:Sequelize.STRING,
         allowNull:false,
       },
@@ -42,6 +41,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('symptoms');
+    return queryInterface.dropTable('symptoms_polls');
   }
 };

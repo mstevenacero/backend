@@ -4,26 +4,26 @@ import Sequelize from 'sequelize';
 
 
 const model = (sequelize, DataTypes) => {
-  let symptoms = sequelize.define('symptoms',{
+  let symptoms_polls = sequelize.define('symptoms_polls',{
     id: {
       type: DataTypes.INTEGER,
       autoIncrement:true,
       primaryKey:true
     },
-    id_user: {
+    id_symptoms: {
       type: DataTypes.INTEGER,
       allowNull:false
     },
-    flag: {
+    clasification: {
       type:DataTypes.STRING,
       allowNull:false,
       unique:true,
     },
-    data_symptoms: {
+    data_symptoms_poll: {
       type:DataTypes.JSON,
       allowNull:false,
     },
-    descripcion: {
+    description_profesional: {
       type:DataTypes.STRING,
       allowNull:false,
     },
@@ -31,7 +31,7 @@ const model = (sequelize, DataTypes) => {
     updatedAt: Sequelize.DATE,
   })
     
-  return symptoms
+  return symptoms_polls
 }
 
 export default model( sequelize, Sequelize.DataTypes )

@@ -12,4 +12,7 @@ route.use('/roles', roles);
 import symptoms from '../components/symptoms/network.js';
 route.use('/symptoms', symptoms);
 
+import symptoms_polls from '../components/symptoms-polls/network.js';
+route.use('/symptoms_polls', symptoms_polls);
+
 export default route;
