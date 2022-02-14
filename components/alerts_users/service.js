@@ -2,15 +2,14 @@ import abstractService from '../../services/abstractService.js';
 
 import role from '../roles/roles.js'
 import users from '../users/users.js'
-import symptom_poll from './symptoms_polls.js';
-import symptom from '../symptoms/symptoms.js'
+import alerts_users from './alerts_users.js';
 
 //Relations
-symptom_poll.belongsTo(symptom,{                    
-    foreignKey: 'id_symptoms'
+alerts_users.belongsTo(users,{                    
+    foreignKey: 'id_user_alert'
 })
 
-class SymptomPollService extends abstractService {
+class alertsUserService extends abstractService {
 
     constructor(){
         super()
@@ -18,16 +17,17 @@ class SymptomPollService extends abstractService {
             attributes: { exclude: ['password'] },
             include: [
                 {
-                    model: symptom,
-                    attributes:['id_user_symptoms'],
+                    model: users,
+                    attributes:['id'],
                 }
             ]
         }    
 
         this.setRelations(relations)
-        this.setModel(symptom_poll)
+        this.setModel(alerts_users)
+        
     }
 
 }
 
-export default SymptomPollService;
+export default alertsUserService;

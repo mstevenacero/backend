@@ -28,12 +28,39 @@ module.exports = {
       num_document: {
         type:Sequelize.INTEGER,
         allowNull:false,
-   
       },
       password: {
         type:Sequelize.STRING,
         allowNull:true
-      },  
+      },
+      phone: {
+        type: Sequelize.INTEGER,
+      },
+      movil: {
+        type: Sequelize.DOUBLE,
+        allowNull:false,
+      },
+      gener: {
+        type: Sequelize.STRING,
+      },
+      date_of_birth: {
+        type: Sequelize.STRING,
+      },
+      level_school: {
+        type: Sequelize.STRING,
+      },
+      life_alone: {
+        type: Sequelize.STRING,
+      },
+      grup_etni: {
+        type: Sequelize.STRING,
+      },
+      vunerable_person: {
+        type: Sequelize.STRING,
+      },
+      family_conection: {
+        type: Sequelize.STRING,
+      },
       role_id: {
         type: Sequelize.INTEGER,
       },

@@ -30,12 +30,39 @@ const model = (sequelize, DataTypes) => {
     num_document: {
       type:DataTypes.INTEGER,
       allowNull:false,
- 
     },
     password: {
       type:DataTypes.STRING,
-      allowNull:true
-    },  
+    
+    },
+    phone: {
+      type: DataTypes.INTEGER,
+    },
+    movil: {
+      type: DataTypes.DOUBLE,
+      allowNull:false,
+    },
+    gener: {
+      type: DataTypes.STRING,
+    },
+    date_of_birth: {
+      type: DataTypes.STRING,
+    },
+    level_school: {
+      type: DataTypes.STRING,
+    },
+    life_alone: {
+      type: DataTypes.STRING,
+    },
+    grup_etni: {
+      type: DataTypes.STRING,
+    },
+    vunerable_person: {
+      type: DataTypes.STRING,
+    },
+    family_conection: {
+      type: DataTypes.STRING,
+    },
     role_id: {
       type: DataTypes.INTEGER,
     },

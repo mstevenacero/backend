@@ -4,38 +4,29 @@ import Sequelize from 'sequelize';
 
 
 const model = (sequelize, DataTypes) => {
-  let symptoms = sequelize.define('symptoms',{
+  let alerts_users = sequelize.define('alerts_users',{
     id: {
       type: DataTypes.INTEGER,
       autoIncrement:true,
       primaryKey:true
     },
-    id_user: {
+    id_user_alert: {
       type: DataTypes.INTEGER,
       allowNull:false
     },
-    id_user_symptoms: {
-      type: DataTypes.INTEGER,
+    description_alerts: {
+      type: DataTypes.STRING,
       allowNull:false
     },
-    flag: {
-      type:DataTypes.STRING,
-      allowNull:false,
-      unique:true,
-    },
-    data_symptoms: {
+    symptoms_user: {
       type:DataTypes.JSON,
-      allowNull:false,
-    },
-    descripcion: {
-      type:DataTypes.STRING,
       allowNull:false,
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   })
     
-  return symptoms
+  return  alerts_users
 }
 
 export default model( sequelize, Sequelize.DataTypes )

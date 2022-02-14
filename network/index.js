@@ -14,5 +14,12 @@ route.use('/symptoms', symptoms);
 
 import symptoms_polls from '../components/symptoms-polls/network.js';
 route.use('/symptoms_polls', symptoms_polls);
+//alerts_users
+import alerts_users from '../components/alerts_users/network.js';
+route.use('/alerts_users', alerts_users);
+
+import alerts_types from '../components/alerts_types/network.js';
+route.use('/alerts_types', alerts_types);
+
 
 export default route;
