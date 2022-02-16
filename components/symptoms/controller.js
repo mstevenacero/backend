@@ -1,6 +1,8 @@
 import service from './service.js'
 import Alerts_users from '../alerts_users/service.js'
 import symptomsService from '../symptoms-polls/service.js'
+import alertsTypesService from '../alerts_types/service.js'
+const alertaServices = new alertsTypesService
 const Service = new service
 const symptomsUser= new symptomsService
 const alerts_users = new Alerts_users
@@ -13,6 +15,8 @@ async function add(req, res, next){
     console.log("body del request2 ",req.body.data_symptoms)
     console.log("body del request ",req.body.id_user_symptoms)
     const dataSymptons = await symptomsUser.getOne({where:{id_symptoms :req.body.id_user_symptoms}})
+    const type = "sintomatologia";
+    const typeAlerts = await  alertaServices.getOne({where:{type_alert:type}});
     console.log("SINTOMAS DEL ID ", dataSymptons['dataValues'].data_symptoms_poll['symptons']);
     const symtomsReturn = req.body.data_symptoms
     const dataUserSymptoms =req.body.data_symptoms['data'].length;
@@ -29,7 +33,7 @@ async function add(req, res, next){
             console.log("entre");
             let userAlertForm ={
                 id_user_alert:req.body.id_user,
-                description_alerts:"esta es una alerta de medico",
+                description_alerts:typeAlerts.description_alerta,
                 symptoms_user:symtomsReturn
             }
            console.log("userAlertForm",userAlertForm)

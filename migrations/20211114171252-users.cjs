@@ -44,7 +44,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       date_of_birth: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       level_school: {
         type: Sequelize.STRING,

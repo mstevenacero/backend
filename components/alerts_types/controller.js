@@ -36,8 +36,8 @@ async function symptomsUsers(req, res, next){
 
     try{
         console.log("lo que llega",req.body);
-        const flag = req.body.flag
-        const data = await Service.getOne({where:{flag:flag }})
+        const flag = req.body.type_alert
+        const data = await Service.getOne({where:{ype_alert:req.body.type_alert }})
             return res.success({ data: data, message:'Symptoms'},200).send('login exitoso')
        
     

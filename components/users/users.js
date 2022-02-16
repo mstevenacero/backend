@@ -46,7 +46,7 @@ const model = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     date_of_birth: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     level_school: {
       type: DataTypes.STRING,

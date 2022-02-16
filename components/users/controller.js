@@ -1,12 +1,64 @@
 import service from './service.js'
+import getTypeAlert from '../alerts_types/service.js'
+import Alerts_users from '../alerts_users/service.js'
+const alerts_users = new Alerts_users
 const Service = new service
+const alertaServices = new getTypeAlert
 
 async function add(req, res, next){
-console.log("reques",req);
+console.log("reques",req.body.date_of_birth);
+const dateYears= req.body.date_of_birth;
+const residentAlert = req.body.residencia;
+let alertSymptom = false
+    if(residentAlert=='soacha'||residentAlert=='sibate'){
+        console.log("entramos a ala creacion de usuario");
+            const data = await Service.Create(req.body)
+            const dateUser = await Service.getOne({where:{email:req.body.email}})
+            console.log("entre al user",dateUser.dataValues['id']);
+            const userId= dateUser.dataValues['id'];
+            alertSymptom = true
+            //inicio de alertas de edad//
+            const type = "Zona de riesgo";
+            const typeAlerts = await  alertaServices.getOne({where:{type_alert:type}});
+            const descripcionAlert =typeAlerts.dataValues['description_alerta']
+            console.log(typeAlerts.dataValues['description_alerta']);
+            console.log("entre 2");
+            let userAlertForm ={
+                id_user_alert:userId,
+                description_alerts:descripcionAlert,
+                symptoms_user:{}
+            }
+            const dataAlert = await alerts_users.Create(userAlertForm)
+           console.log("userAlertForm",userAlertForm)
+            return res.success({ data: data,userAlertForm,alertSymptom, message:'User create'},200)
+    }
     try{
+        if(dateYears>60){
+            console.log("entramos a ala creacion de usuario");
+            const data = await Service.Create(req.body)
+            const dateUser = await Service.getOne({where:{email:req.body.email}})
+            console.log("entre al user",dateUser.dataValues['id']);
+            const userId= dateUser.dataValues['id'];
+            alertSymptom = true
+            //inicio de alertas de edad//
+            const type = "mayor";
+            const typeAlerts = await  alertaServices.getOne({where:{type_alert:type}});
+            const descripcionAlert =typeAlerts.dataValues['description_alerta']
+            console.log(descripcionAlert);
+            console.log("entre 2");
+            let userAlertForm ={
+                id_user_alert:userId,
+                description_alerts:descripcionAlert,
+                symptoms_user:{}
+            }
+            const dataAlert = await alerts_users.Create(userAlertForm)
+           console.log("userAlertForm",userAlertForm)
+            return res.success({ data: data,userAlertForm,alertSymptom, message:'User create'},200)
+
+        }else{
         const data = await Service.Create(req.body)
         return res.success({ data: data, message:'User create'},200)
-
+        }
     } catch(e){
         return res.error({e, message:'no se pudo crear'}, 500)
     }
