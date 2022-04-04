@@ -1,10 +1,13 @@
 import service from './service.js'
 const Service = new service
 
+
+
 async function add(req, res, next){
+    
     try{
         const data = await Service.Create(req.body)
-        return res.success({ data: data, message:'User create'},200)
+        return res.success({ data: data,alertSymptom ,message:'User create'},200)
 
     } catch(e){
         return res.error(e, 500)
@@ -22,32 +25,20 @@ async function list(req, res, next){
 
 async function show(req, res, next){
     try{
-        const data = await Service.getOne({ where: { flag:req.params.flag} })
+        const data = await Service.getOne({ where: {id:req.params.id} })
         return res.success({ data: data, message:'User'},200)
 
     } catch(e){
         return res.error(e, 500)
     }
 }
-
-async function symptomsListU(req, res, next){
-
-    try{
-        const data = await Service.showAll({ where: { ubication:req.params.ubication} })
-        return res.success({ data: data, message:'User'},200)
-
-    } catch(e){
-        return res.error(e, 500)
-    }  
-}
-
-async function symptoms(req, res, next){
+async function listPatologySymtons(req, res, next){
+console.log("llegamos aca ");
 
     try{
-        console.log("lo que llega",req.body);
-        const flag = req.body.flag
-        const data = await Service.getOne({where:{clasification:clasification}})
-        return res.success({ data: data, message:'User'},200)
+        console.log("lo que llega",req.params.code_patology);
+        const data = await Service.showAll({where:{code_patology:req.params.code_patology }})
+        return res.success({ data: data, message:'patology lisy'},200)
        
     
     }catch(e){
@@ -69,6 +60,5 @@ export default {
     list,
     update,
     show,
-    symptoms,
-    symptomsListU
+    listPatologySymtons
 }

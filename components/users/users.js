@@ -36,7 +36,7 @@ const model = (sequelize, DataTypes) => {
     
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
     },
     movil: {
       type: DataTypes.DOUBLE,
@@ -46,7 +46,7 @@ const model = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     date_of_birth: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
     },
     level_school: {
       type: DataTypes.STRING,
@@ -61,7 +61,7 @@ const model = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     family_conection: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     role_id: {
       type: DataTypes.INTEGER,

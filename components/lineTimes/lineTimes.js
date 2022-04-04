@@ -2,36 +2,32 @@
 import sequelize from '../../db.js'
 import Sequelize from 'sequelize';
 
-
 const model = (sequelize, DataTypes) => {
-  let symptoms = sequelize.define('symptoms',{
+  let lineTimes = sequelize.define('lineTimes',{
     id: {
       type: DataTypes.INTEGER,
       autoIncrement:true,
       primaryKey:true
     },
-    id_user: {
+    status: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
+    doctor: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
+    user_id: {
       type: DataTypes.INTEGER,
     },
-    id_user_symptoms: {
-      type: DataTypes.INTEGER,
-    },
-    flag: {
-      type:DataTypes.STRING
-    },
-    data_symptoms: {
-      type:DataTypes.JSON,
-      allowNull:false,
-    },
-    descripcion: {
-      type:DataTypes.STRING,
-      allowNull:false,
+    description: {
+      type: DataTypes.STRING,
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   })
     
-  return symptoms
+  return lineTimes
 }
 
 export default model( sequelize, Sequelize.DataTypes )

@@ -5,19 +5,16 @@ import Sequelize from 'sequelize';
 
 const model = (sequelize, DataTypes) => {
   let symptoms_polls = sequelize.define('symptoms_polls',{
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement:true,
-      primaryKey:true
-    },
     id_symptoms: {
       type: DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
+      primaryKey:true
     },
     clasification: {
       type:DataTypes.STRING,
-      allowNull:false,
-      unique:true,
+    },
+    ubication: {
+      type:DataTypes.STRING,
     },
     data_symptoms_poll: {
       type:DataTypes.JSON,

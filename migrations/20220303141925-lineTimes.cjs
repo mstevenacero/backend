@@ -2,31 +2,25 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('symptoms',{
+    return queryInterface.createTable('lineTimes',{
       id: {
         type: Sequelize.INTEGER,
         autoIncrement:true,
         primaryKey:true
       },
-      id_user: {
+      status: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      doctor: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      user_id: {
         type: Sequelize.INTEGER,
-        allowNull:false
       },
-      id_user_symptoms:{
-        type:Sequelize.INTEGER,
-        allowNull:false
-      },
-      flag: {
-        type:Sequelize.STRING
-      },
-      data_symptoms: {
-        type:Sequelize.JSON,
-        allowNull:false,
-    
-      },
-      descripcion: {
-        type:Sequelize.STRING,
-        allowNull:false,
+      description: {
+        type: Sequelize.STRING,
       },
       // Timestamps
       
@@ -44,6 +38,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('symptoms');
+    return queryInterface.dropTable('lineTimes');
   }
 };

@@ -2,25 +2,13 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('symptoms_polls',{
-      id_symptoms: {
+    return queryInterface.createTable('patologys',{
+      code: {
         type: Sequelize.INTEGER,
-        allowNull:false,
         primaryKey:true
       },
-      clasification: {
-        type:Sequelize.STRING
-      },
-      ubication: {
-        type:Sequelize.STRING
-      },
-      data_symptoms_poll: {
-        type:Sequelize.JSON,
-        allowNull:false,
-      },
-      description_profesional: {
-        type:Sequelize.STRING,
-        allowNull:false,
+      name_patology: {
+        type: Sequelize.STRING,
       },
       // Timestamps
       
@@ -38,6 +26,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('symptoms_polls');
+    return queryInterface.dropTable('patologys');
   }
 };

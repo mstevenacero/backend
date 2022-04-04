@@ -21,5 +21,16 @@ route.use('/alerts_users', alerts_users);
 import alerts_types from '../components/alerts_types/network.js';
 route.use('/alerts_types', alerts_types);
 
+import symptomsPatologys from '../components/symptomsPatologys/network.js';
+route.use('/symptomsPatologys', symptomsPatologys);
+
+import patologys from '../components/patologys/network.js';
+route.use('/patologys', patologys);
+
+import lineTimes from '../components/lineTimes/network.js';
+route.use('/lineTimes', lineTimes);
+
+
+
 
 export default route;

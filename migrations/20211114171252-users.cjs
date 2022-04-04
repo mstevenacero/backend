@@ -34,7 +34,7 @@ module.exports = {
         allowNull:true
       },
       phone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
       },
       movil: {
         type: Sequelize.DOUBLE,
@@ -44,7 +44,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       date_of_birth: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DATE,
       },
       level_school: {
         type: Sequelize.STRING,
@@ -59,7 +59,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       family_conection: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       role_id: {
         type: Sequelize.INTEGER,

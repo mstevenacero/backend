@@ -28,6 +28,7 @@ const config = {
   publicPath:process.env.PUBLIC_PATH,  
   filesUrl:process.env.FILES_URL,
   fileSize:process.env.FILESIZE,
+  originApi: process.env.API_ORIGIN || false,
 };
 
 
