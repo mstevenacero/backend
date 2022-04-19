@@ -4,10 +4,11 @@ const Service = new service
 
 
 async function add(req, res, next){
+    console.log("body",req.body);
     
     try{
         const data = await Service.Create(req.body)
-        return res.success({ data: data,alertSymptom ,message:'User create'},200)
+        return res.success({ data: data,message:'User create'},200)
 
     } catch(e){
         return res.error(e, 500)
@@ -24,26 +25,15 @@ async function list(req, res, next){
 }
 
 async function show(req, res, next){
+
+    let user_id = req.params.user_id
     try{
-        const data = await Service.getOne({ where: {id:req.params.id} })
+        const data = await Service.showAll({ where: {user_id:user_id} })     
         return res.success({ data: data, message:'User'},200)
 
     } catch(e){
         return res.error(e, 500)
     }
-}
-async function symptomsUsers(req, res, next){
-
-    try{
-        console.log("lo que llega",req.body);
-        const flag = req.body.type_alert
-        const data = await Service.getOne({where:{ype_alert:req.body.type_alert }})
-            return res.success({ data: data, message:'Symptoms'},200).send('login exitoso')
-       
-    
-    }catch(e){
-        return res.error(e, 500)
-    }    
 }
 
 async function update(req, res, next){
@@ -59,6 +49,5 @@ export default {
     add,
     list,
     update,
-    show,
-    symptomsUsers
+    show
 }

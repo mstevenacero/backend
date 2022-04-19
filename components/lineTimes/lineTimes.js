@@ -15,10 +15,13 @@ const model = (sequelize, DataTypes) => {
     },
     doctor: {
       type: DataTypes.STRING,
-      allowNull:false
+    
     },
     user_id: {
       type: DataTypes.INTEGER,
+    },
+    date_user:{
+      type: DataTypes.DATE,
     },
     description: {
       type: DataTypes.STRING,

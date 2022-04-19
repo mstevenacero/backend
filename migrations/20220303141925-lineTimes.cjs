@@ -14,10 +14,12 @@ module.exports = {
       },
       doctor: {
         type: Sequelize.STRING,
-        allowNull:false
       },
       user_id: {
         type: Sequelize.INTEGER,
+      },
+      date_user:{
+        type: Sequelize.DATE,
       },
       description: {
         type: Sequelize.STRING,
