@@ -1,4 +1,7 @@
 import service from './service.js'
+import fs from 'fs';
+
+
 
 import getTypeAlert from '../alerts_types/service.js'
 import Alerts_users from '../alerts_users/service.js'
@@ -6,11 +9,14 @@ const alerts_users = new Alerts_users
 const Service = new service
 const alertaServices = new getTypeAlert
 async function add(req, res, next) {
+    let rawdata = fs.readFileSync('./residences/residences.json');
+    let student = JSON.parse(rawdata);
+    //console.log("data estudents", student);
     console.log("reques", req.body.date_of_birth);
     const dateYears = req.body.date_of_birth;
     const lifeAlone = req.body.life_alone
 
-    console.log("vive solo",lifeAlone);
+    console.log("vive solo", lifeAlone);
     ///////////funtions dateyears
     /////////
     ////////////////
@@ -26,8 +32,19 @@ async function add(req, res, next) {
     }
     console.log("edada", edad);
     const residentAlert = req.body.residencia;
+    console.log(residentAlert);
+    let resTmp = false
+    const dataResident = student.map(item=>{
+        //console.log("ietm",item.Ubicacion);
+        if(item.Ubicacion === residentAlert){
+             return resTmp = true
+        }else{
+            console.log("estado de alerta",false);
+        }
+    })
+    console.log(resTmp);
     let alertSymptom = false
-    if(edad < 14 && lifeAlone == 'Si' && residentAlert !== 'soacha' ||edad < 14 && lifeAlone == 'Si' && residentAlert !== 'sibate' || edad > 60 && lifeAlone == 'Si' && residentAlert !== 'sibate' || edad > 60 && lifeAlone == 'Si' && residentAlert !== 'soacha'){
+    if (edad < 14 && lifeAlone == 'Si' && resTmp !== true || edad < 14 && lifeAlone == 'Si' && resTmp !== true || edad > 60 && lifeAlone == 'Si' && resTmp !== true || edad > 60 && lifeAlone == 'Si' && resTmp !== true) {
         console.log("entramos al primer caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -46,10 +63,10 @@ async function add(req, res, next) {
         }
         const dataAlert = await alerts_users.Create(userAlertForm)
         console.log("userAlertForm", userAlertForm)
-        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)        
+        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
-    if(edad < 14 && residentAlert == 'soacha' && lifeAlone == "No"|| edad < 14 && residentAlert == 'sibate' && lifeAlone == "No"){
+    if (edad < 14 && resTmp == true && lifeAlone == "No") {
         console.log("entramos al segundo caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -68,10 +85,10 @@ async function add(req, res, next) {
         }
         const dataAlert = await alerts_users.Create(userAlertForm)
         console.log("userAlertForm", userAlertForm)
-        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)        
+        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
-    if(edad > 60 && residentAlert == 'soacha' && lifeAlone == "No" ||edad > 60 && residentAlert == 'sibate' && lifeAlone == "No"){
+    if (edad > 60 && resTmp == true && lifeAlone == "No" ) {
         console.log("entramos al tercer caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -80,7 +97,7 @@ async function add(req, res, next) {
         alertSymptom = true
         //inicio de alertas de edad//
         const type = "mayor y Zona de riesgo";
-        
+
         const typeAlerts = await alertaServices.getOne({ where: { type_alert: type } });
         const descripcionAlert = typeAlerts.dataValues['description_alerta']
         console.log(descripcionAlert);
@@ -91,10 +108,10 @@ async function add(req, res, next) {
         }
         const dataAlert = await alerts_users.Create(userAlertForm)
         console.log("userAlertForm", userAlertForm)
-        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)        
+        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
-    if(lifeAlone == "Si" && residentAlert == 'soacha' || lifeAlone == "Si" && residentAlert == 'sibate' ){
+    if (lifeAlone == "Si" && resTmp == true ) {
         console.log("entramos al cuarto caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -113,10 +130,10 @@ async function add(req, res, next) {
         }
         const dataAlert = await alerts_users.Create(userAlertForm)
         console.log("userAlertForm", userAlertForm)
-        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)        
+        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
-    if( edad > 60 && lifeAlone == "Si" && residentAlert == 'soacha' || edad > 60 && lifeAlone == "Si" && residentAlert == 'sibate' ){
+    if (edad > 60 && lifeAlone == "Si" && resTmp == true) {
         console.log("entramos al penultimo caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -135,10 +152,10 @@ async function add(req, res, next) {
         }
         const dataAlert = await alerts_users.Create(userAlertForm)
         console.log("userAlertForm", userAlertForm)
-        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)        
+        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
-    if( edad <14 && lifeAlone == "Si" && residentAlert == 'soacha' || edad <14 && lifeAlone == "Si" && residentAlert == 'sibate' ){
+    if (edad < 14 && lifeAlone == "Si" && resTmp == true ) {
         console.log("entramos al ultimo caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -157,7 +174,7 @@ async function add(req, res, next) {
         }
         const dataAlert = await alerts_users.Create(userAlertForm)
         console.log("userAlertForm", userAlertForm)
-        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)        
+        return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
     if (lifeAlone == "Si") {
@@ -182,7 +199,7 @@ async function add(req, res, next) {
         return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
     }
-    if (residentAlert == 'soacha' || residentAlert == 'sibate') {
+    if (resTmp == true) {
         console.log("entramos al sexto caso");
         const data = await Service.Create(req.body)
         const dateUser = await Service.getOne({ where: { email: req.body.email } })
@@ -228,7 +245,7 @@ async function add(req, res, next) {
             return res.success({ data: data, userAlertForm, alertSymptom, message: 'User create' }, 200)
 
         }
-        if (edad <14) {
+        if (edad < 14) {
             console.log("entramos al octavo caso");
             const data = await Service.Create(req.body)
             const dateUser = await Service.getOne({ where: { email: req.body.email } })

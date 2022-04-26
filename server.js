@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({limit: '900mb', extended: true, parameterLimit:90
 app.use(morgan('tiny'));
 
 import confiCors from './config/cors.js';
-app.use(cors(confiCors));
+app.use(cors());
 
 app.use(helmet());
 app.disable('x-powered-by');
