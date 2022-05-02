@@ -313,7 +313,7 @@ async function autentication(req, res, next) {
 
 async function update(req, res, next) {
     try {
-        const data = await Service.Update({ where: { id: req.params.id } }, req.body)
+        const data = await Service.Update({ where: { email: req.params.email } }, req.body)
         return res.success({ data: data, message: 'User updated' }, 200)
     } catch (e) {
         return res.error(e, 500)
